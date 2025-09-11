@@ -3971,6 +3971,19 @@ td:last-child {
     position: relative;
 }
 
+.folio-card__buttons .btn--stroke {
+    white-space: normal;
+    line-height: 1.2;
+}
+
+.folio-card__buttons .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    white-space: normal;
+}
+
 .folio-entries .entry__link {
     display : block;
     position: relative;
@@ -4462,17 +4475,184 @@ td:last-child {
 }
 
 .logo-text {
-  font-family: 'Poppins', sans-serif;   /* police moderne */
-  font-weight: 700;                     /* texte épais */
-  font-size: 1.8rem;                    /* taille */
-  color: var(--color-btn);                       /* couleur du texte */
-  letter-spacing: 1px;                  /* espacement */
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--color-btn);
+  letter-spacing: 1px;
   position: relative;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
-/* effet hover */
 .logo-text:hover {
   color: var(--color-btn-hover);
+}
+
+/* ===== Folio Section ===== */
+.folio-item {
+    margin-bottom: 3rem;
+}
+
+.folio-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.folio-card__content .text-display-title{
+    font-size: 5rem;
+}
+
+.folio-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Mise en page 2 colonnes */
+.folio-card__row {
+    display: flex;
+    flex-direction: column;
+}
+
+.folio-card__image {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.folio-card__image img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.folio-card__content {
+    padding: 1.5rem;
+}
+
+.folio-card__title {
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+}
+
+.folio-card__desc {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    color: #555;
+}
+
+/* Accordéons */
+.accordion {
+    margin-bottom: 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-btn {
+    width: 100%;
+    text-align: left;
+    background: #f5f5f5;
+    border: none;
+    outline: none;
+    padding: 1rem 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.accordion-btn:hover {
+    background: #eaeaea;
+}
+
+.accordion-btn::after {
+    content: "+";
+    float: right;
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.accordion-btn.active::after {
+    content: "-";
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 1.2rem;
+    background: #fff;
+}
+
+.accordion-content p {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.5rem;
+    color: #444;
+}
+
+.accordion-content.open {
+    padding: 1rem 1.2rem;
+}
+
+/* Liste des librairies */
+.folio-card__list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 1rem 0;
+}
+
+.folio-card__list li {
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+    padding-left: 1.2rem;
+    position: relative;
+    color: #444;
+}
+
+.folio-card__list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #000;
+}
+
+/* Boutons */
+.folio-card__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+@media (min-width: 768px) {
+    .folio-card__buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .folio-card__buttons .btn {
+        flex: 1;
+        min-width: 150px;
+    }
+}
+
+/* Responsive 2 colonnes */
+@media (min-width: 992px) {
+    .folio-card__row {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    .folio-card__image {
+        flex: 1;
+        max-width: 40%;
+        margin-bottom: 0;
+    }
+
+    .folio-card__content {
+        flex: 2;
+        max-width: 60%;
+    }
 }
