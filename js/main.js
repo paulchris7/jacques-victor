@@ -312,3 +312,18 @@
     })();
 
 })(document.documentElement);
+
+// Accordéons (Publications)
+document.querySelectorAll(".accordion-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        btn.classList.toggle("active");
+        const content = btn.nextElementSibling;
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+            content.classList.remove("open");
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            content.classList.add("open");
+        }
+    });
+});
