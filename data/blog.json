@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "L'Art de la Pensée Stratégique",
+    "excerpt": "Explorer comment la pensée stratégique peut transformer votre approche des défis et opportunités de la vie.",
+    "date": "2024-01-15",
+    "image": "images/blog/blog-1.jpg",
+    "url": "#"
+  },
+  {
+    "id": 2,
+    "title": "L'Écriture comme Forme de Résistance",
+    "excerpt": "Comment la littérature devient un outil puissant de changement social et de transformation personnelle.",
+    "date": "2024-01-10",
+    "image": "images/blog/blog-2.jpg",
+    "url": "#"
+  },
+  {
+    "id": 3,
+    "title": "La Philosophie de l'Invincibilité",
+    "excerpt": "Comprendre ce que signifie être vraiment invincible dans un monde plein d'obstacles.",
+    "date": "2024-01-05",
+    "image": "images/blog/blog-3.jpg",
+    "url": "#"
+  },
+  {
+    "id": 4,
+    "title": "Développer la Résilience par la Littérature",
+    "excerpt": "Comment la lecture et l'écriture peuvent nous aider à développer la force mentale pour surmonter l'adversité.",
+    "date": "2024-01-01",
+    "image": "images/blog/blog-4.jpg",
+    "url": "#"
+  },
+  {
+    "id": 5,
+    "title": "Le Pouvoir du Récit",
+    "excerpt": "Pourquoi les histoires comptent et comment elles façonnent notre compréhension du monde qui nous entoure.",
+    "date": "2023-12-28",
+    "image": "images/blog/blog-5.jpg",
+    "url": "#"
+  }
+]
+
+
