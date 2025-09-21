@@ -28,6 +28,8 @@
     <!-- Font Awesome 6 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
 
 </head>
 
@@ -70,6 +72,10 @@
                         <li class="current"><a class="smoothscroll" href="#intro">Accueil</a></li>
                         <li><a class="smoothscroll" href="#about">Biographie</a></li>
                         <li><a class="smoothscroll" href="#works">Publications</a></li>
+                        <li><a class="smoothscroll" href="#blog">Blog</a></li>
+                        <li><a class="smoothscroll" href="#events">Événements</a></li>
+                        <li><a class="smoothscroll" href="#gallery">Galerie</a></li>
+                        <li><a class="smoothscroll" href="#links">Liens Utiles</a></li>
                         <li><a class="smoothscroll" href="#footer">Contact</a></li>
                     </ul> <!-- s-header__menu-links -->    
                 </nav> <!-- end s-header__nav -->
@@ -404,6 +410,160 @@
         </section> <!-- end s-works --> 
 
 
+        <!-- # blog
+        ================================================== -->
+        <section id="blog" class="s-blog target-section">
+
+            <div class="row">
+                <div class="column xl-12">
+                    <div class="section-header" data-num="03">
+                        <h2 class="text-display-title">Blog.</h2>
+                    </div> <!-- end section-header -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column xl-12">
+                    <div class="swiper-container s-blog__slider">
+                        <div class="swiper-wrapper" id="blog-slides">
+                            <!-- Blog slides will be loaded dynamically -->
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next" aria-label="Slide suivante"></div>
+                        <div class="swiper-button-prev" aria-label="Slide précédente"></div>
+                    </div>
+                </div>
+            </div>
+
+        </section> <!-- end s-blog -->
+
+
+        <!-- # events
+        ================================================== -->
+        <section id="events" class="s-events target-section">
+
+            <div class="row">
+                <div class="column xl-12">
+                    <div class="section-header" data-num="04">
+                        <h2 class="text-display-title">Événements.</h2>
+                    </div> <!-- end section-header -->
+                </div>
+            </div>
+
+            <div class="row s-events__content">
+                <div class="column xl-8 md-12 s-events__calendar">
+                    <div id="calendar"></div>
+                </div>
+                <div class="column xl-4 md-12 s-events__sidebar">
+                    <div class="s-events__search">
+                        <input type="text" id="event-search" placeholder="Rechercher des événements..." aria-label="Rechercher des événements">
+                    </div>
+                    <div id="event-details" class="s-events__details">
+                        <h4>Sélectionnez un événement pour voir les détails</h4>
+                        <p>Cliquez sur n'importe quel événement dans le calendrier pour voir plus d'informations.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section> <!-- end s-events -->
+
+
+        <!-- # gallery
+        ================================================== -->
+        <section id="gallery" class="s-gallery target-section">
+
+            <div class="row">
+                <div class="column xl-12">
+                    <div class="section-header" data-num="05">
+                        <h2 class="text-display-title">Galerie.</h2>
+                    </div> <!-- end section-header -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column xl-12">
+                    <div class="swiper-container s-gallery__slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide s-gallery__slide">
+                                <img src="images/gallery/gallery-1.jpg" alt="Auteur lors de la séance de dédicace" loading="lazy">
+                                <div class="s-gallery__caption">
+                                    <h4>Séance de Dédicace</h4>
+                                    <p>Rencontre avec les lecteurs lors du lancement officiel</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide s-gallery__slide">
+                                <img src="images/gallery/gallery-2.jpg" alt="Atelier d'écriture créative" loading="lazy">
+                                <div class="s-gallery__caption">
+                                    <h4>Atelier d'Écriture</h4>
+                                    <p>Partage des techniques d'écriture créative</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide s-gallery__slide">
+                                <img src="images/gallery/gallery-3.jpg" alt="Présentation lors de la conférence littéraire" loading="lazy">
+                                <div class="s-gallery__caption">
+                                    <h4>Conférence Littéraire</h4>
+                                    <p>Présentation lors de la conférence sur l'Avenir de la Littérature</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide s-gallery__slide">
+                                <img src="images/gallery/gallery-4.jpg" alt="Séance de lecture d'auteur" loading="lazy">
+                                <div class="s-gallery__caption">
+                                    <h4>Lecture d'Auteur</h4>
+                                    <p>Séance de lecture intime avec des œuvres sélectionnées</p>
+                                </div>
+                            </div>
+                            <div class="swiper-slide s-gallery__slide">
+                                <img src="images/gallery/gallery-5.jpg" alt="Participation au festival littéraire" loading="lazy">
+                                <div class="s-gallery__caption">
+                                    <h4>Festival Littéraire</h4>
+                                    <p>Participation au festival Mots & Sagesse</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next" aria-label="Slide suivante"></div>
+                        <div class="swiper-button-prev" aria-label="Slide précédente"></div>
+                    </div>
+                </div>
+            </div>
+
+        </section> <!-- end s-gallery -->
+
+
+        <!-- # useful links
+        ================================================== -->
+        <section id="links" class="s-links target-section">
+
+            <div class="row">
+                <div class="column xl-12">
+                    <div class="section-header" data-num="06">
+                        <h2 class="text-display-title">Liens Utiles.</h2>
+                    </div> <!-- end section-header -->
+                </div>
+            </div>
+
+            <div class="row s-links__content">
+                <div class="column xl-6 md-12 s-links__block">
+                    <h4>Édition & Écriture</h4>
+                    <ul class="s-links__list">
+                        <li><a href="https://www.amazon.fr/LULTIME-PARTIE-LINVINCIBLE-strat%C3%A9gique-lindomptable/dp/9920236586" target="_blank" rel="noopener">Amazon - Acheter le Livre</a></li>
+                        <li><a href="https://www.jumia.ma/pouvoir-lultime-partie-de-linvincible-le-manuel-strategique-de-lindomptable-67185840.html" target="_blank" rel="noopener">Jumia Maroc</a></li>
+                        <li><a href="https://www.marjanemall.ma/l-ultime-partie-de-l-invincible-le-livre-strategique-de-l-indomptable-interieur-aabey64788" target="_blank" rel="noopener">Marjane Mall</a></li>
+                    </ul>
+                </div>
+                <div class="column xl-6 md-12 s-links__block">
+                    <h4>Ressources & Inspiration</h4>
+                    <ul class="s-links__list">
+                        <li><a href="https://www.facebook.com/jacquesvictoraphael/" target="_blank" rel="noopener">Page Facebook</a></li>
+                        <li><a href="https://www.instagram.com/jacquesvictoraphael/" target="_blank" rel="noopener">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/in/jacques-victor-raphael-b338ba359?originalSubdomain=ma" target="_blank" rel="noopener">Profil LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </section> <!-- end s-links -->
+
+
         <!-- # numbers
         ================================================== -->
         <section id="numbers" class="s-numbers">
@@ -465,7 +625,7 @@
 
             <div class="row">
                 <div class="column lg-12">
-                    <div class="section-header light-on-dark" data-num="03">
+                    <div class="section-header light-on-dark" data-num="07">
                         <h2 class="text-display-title">Contacter l'auteur.</h2>
                     </div> <!-- end section-header -->
                 </div>
@@ -561,6 +721,8 @@
     <!-- Java Script
     ================================================== -->
     <script src="js/plugins.js"></script>
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
     <script src="js/main.js"></script>
 
 </body>
