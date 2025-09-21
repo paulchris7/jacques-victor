@@ -178,6 +178,7 @@
     * ------------------------------------------------------ */ 
     const ssSwiper = function() {
 
+        // Testimonials Swiper
         const testimonialsSwiper = new Swiper('.s-testimonials__slider', {
 
             slidesPerView: 1,
@@ -203,6 +204,33 @@
                 }
             }
         });
+
+        // Blog Swiper will be initialized after content is loaded
+
+        // Gallery Swiper
+        if (typeof Swiper !== 'undefined') {
+            const gallerySwiper = new Swiper('.s-gallery__slider', {
+                slidesPerView: 1,
+                spaceBetween: 0,
+                loop: true,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                autoplay: {
+                    delay: 3500,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.s-gallery__slider .swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.s-gallery__slider .swiper-button-next',
+                    prevEl: '.s-gallery__slider .swiper-button-prev',
+                },
+            });
+        }
 
     }; // end ssSwiper
 
@@ -296,6 +324,198 @@
     }; // end ssMoveTo
 
 
+   /* events calendar
+    * ------------------------------------------------------ */
+    const ssEventsCalendar = function() {
+
+        if (typeof FullCalendar === 'undefined') {
+            console.warn('FullCalendar not loaded');
+            return;
+        }
+
+        const calendarEl = document.getElementById('calendar');
+        const eventDetailsEl = document.getElementById('event-details');
+        const searchInput = document.getElementById('event-search');
+
+        if (!calendarEl) return;
+
+        let eventsData = [];
+        let filteredEvents = [];
+
+        // Load events data
+        fetch('/data/events.json')
+            .then(response => response.json())
+            .then(data => {
+                eventsData = data;
+                filteredEvents = [...data];
+                initializeCalendar();
+            })
+            .catch(error => {
+                console.error('Error loading events:', error);
+                // Fallback: show static message
+                if (eventDetailsEl) {
+                    eventDetailsEl.innerHTML = '<h4>Events Coming Soon</h4><p>Check back later for upcoming events.</p>';
+                }
+            });
+
+        function initializeCalendar() {
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                },
+                navLinks: true,
+                dayMaxEvents: true,
+                events: filteredEvents,
+                eventClick: function(info) {
+                    showEventDetails(info.event);
+                    info.jsEvent.preventDefault();
+                }
+            });
+
+            calendar.render();
+
+            // Search functionality
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    filteredEvents = eventsData.filter(event => 
+                        event.title.toLowerCase().includes(searchTerm) ||
+                        event.extendedProps.description.toLowerCase().includes(searchTerm) ||
+                        event.extendedProps.location.toLowerCase().includes(searchTerm)
+                    );
+                    calendar.removeAllEvents();
+                    calendar.addEventSource(filteredEvents);
+                });
+            }
+        }
+
+        function showEventDetails(event) {
+            if (!eventDetailsEl) return;
+
+            const startDate = new Date(event.start);
+            const endDate = event.end ? new Date(event.end) : null;
+            
+            let dateStr = startDate.toLocaleDateString('fr-FR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            if (endDate && !event.allDay) {
+                dateStr += ` - ${endDate.toLocaleDateString('fr-FR', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                })}`;
+            }
+
+            if (!event.allDay) {
+                dateStr += ` à ${startDate.toLocaleTimeString('fr-FR', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })}`;
+            }
+
+            eventDetailsEl.innerHTML = `
+                <div class="event-detail active">
+                    <h5>${event.title}</h5>
+                    <div class="event-location">📍 ${event.extendedProps.location}</div>
+                    <div class="event-description">${event.extendedProps.description}</div>
+                    ${event.extendedProps.image ? `<img src="${event.extendedProps.image}" alt="${event.title}" class="event-image" loading="lazy">` : ''}
+                    <p><strong>Date:</strong> ${dateStr}</p>
+                    ${event.extendedProps.url ? `<a href="${event.extendedProps.url}" class="btn btn--stroke" target="_blank">More Info</a>` : ''}
+                </div>
+            `;
+        }
+    }; // end ssEventsCalendar
+
+
+   /* load dynamic content
+    * ------------------------------------------------------ */
+    const ssLoadDynamicContent = function() {
+
+        // Load blog posts
+        fetch('/data/blog.json')
+            .then(response => response.json())
+            .then(data => {
+                const blogSlidesEl = document.getElementById('blog-slides');
+                if (blogSlidesEl) {
+                    blogSlidesEl.innerHTML = data.map(post => `
+                        <div class="swiper-slide s-blog__slide">
+                            <div class="s-blog__image">
+                                <img src="${post.image}" alt="${post.title}" loading="lazy">
+                            </div>
+                            <div class="s-blog__content">
+                                <time class="s-blog__date" datetime="${post.date}">${new Date(post.date).toLocaleDateString('fr-FR')}</time>
+                                <h3 class="s-blog__title">${post.title}</h3>
+                                <p class="s-blog__excerpt">${post.excerpt}</p>
+                                <a href="${post.url}" class="s-blog__read-more">Lire la suite →</a>
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    // Initialize blog Swiper after content is loaded
+                    if (typeof Swiper !== 'undefined') {
+                        const blogSwiper = new Swiper('.s-blog__slider', {
+                            slidesPerView: 1,
+                            spaceBetween: 20,
+                            loop: true,
+                            autoplay: {
+                                delay: 4000,
+                                disableOnInteraction: false,
+                            },
+                            pagination: {
+                                el: '.s-blog__slider .swiper-pagination',
+                                clickable: true,
+                            },
+                            navigation: {
+                                nextEl: '.s-blog__slider .swiper-button-next',
+                                prevEl: '.s-blog__slider .swiper-button-prev',
+                            },
+                            breakpoints: {
+                                640: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 20,
+                                },
+                                1024: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 30,
+                                },
+                            },
+                        });
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error loading blog posts:', error);
+            });
+
+        // Load gallery images
+        const galleryImages = [
+            { src: 'images/gallery/gallery-1.jpg', alt: 'Author at book signing', caption: 'Book signing event in Rabat' },
+            { src: 'images/gallery/gallery-2.jpg', alt: 'Writing workshop', caption: 'Creative writing workshop' },
+            { src: 'images/gallery/gallery-3.jpg', alt: 'Literary conference', caption: 'Speaking at literary conference' },
+            { src: 'images/gallery/gallery-4.jpg', alt: 'Author reading', caption: 'Reading from latest work' },
+            { src: 'images/gallery/gallery-5.jpg', alt: 'Book launch', caption: 'Book launch celebration' }
+        ];
+
+        const gallerySlidesEl = document.getElementById('gallery-slides');
+        if (gallerySlidesEl) {
+            gallerySlidesEl.innerHTML = galleryImages.map(img => `
+                <div class="swiper-slide s-gallery__slide">
+                    <img src="${img.src}" alt="${img.alt}" loading="lazy">
+                    <div class="s-gallery__caption">${img.caption}</div>
+                </div>
+            `).join('');
+        }
+    }; // end ssLoadDynamicContent
+
+
    /* Initialize
     * ------------------------------------------------------ */
     (function ssInit() {
@@ -308,6 +528,8 @@
         ssSwiper();
         ssAlertBoxes();
         ssMoveTo();
+        ssEventsCalendar();
+        ssLoadDynamicContent();
 
     })();
 
